@@ -1,0 +1,117 @@
+{% extends 'base2.html' %}
+
+{% block app_content %}
+
+<div class="container-fluid" id="contactcard">
+    <div class="position-relative">
+        <div class="position-absolute top-0 end-0 m-2">
+        <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Edit
+            </button>
+            <a href="{% url 'contact-delete' contact.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% if contact.image %}
+        <img src="{{contact.image.url}}" alt="" id="profile-img">
+    {% else %}
+        <img src="/static/images/contact.jpeg" alt="" id="profile-img">
+    {% endif %}
+    <h4 class="text-center">{{contact.name}}</h4>
+
+    <div class="position-relative">
+        <a href="{% url 'mark-star' contact.pk %}" class="position-absolute end-0">
+            {% if contact.starred %}
+                <i class="fa fa-star-o" aria-hidden="true" style="color: yellow;"></i>
+            {% else %}
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+            {% endif %}
+        </a>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <div class="custom-card m-2 p-2">
+            <h5>Contact Details</h5>
+            <div class="d-flex">
+                <i class="fa fa-envelope-o m-1" aria-hidden="true"></i>
+                {% if email_list %}
+                    {% for email in contact.email %}
+                        <p class="container-fluid m-0">{{email}}</p>
+                    {% endfor %}
+                {% else %}
+                    <p class="container-fluid m-0">{{contact.email}}</p>
+                {% endif %}
+            </div>
+            <div class="d-flex">
+                <i class="fa fa-phone m-1" aria-hidden="true"></i>
+                {% if phone_list %}
+                    {% for phone in contact.phone_no %}
+                        <p class="container-fluid m-0">{{phone}}</p>
+                    {% endfor %}
+                {% else %}
+                    <p class="container-fluid m-0">{{contact.phone_no}}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="custom-card m-2 p-2">
+            <h5>Work Place</h5>
+            <div class="d-flex">
+                <i class="fa fa-briefcase m-1" aria-hidden="true"></i>
+                {% if phone_list %}
+                    {% for address in contact.address %}
+                        <p class="container-fluid m-0">{{address}}</p>
+                    {% endfor %}
+                {% else %}
+                    <p class="container-fluid m-0">{{contact.address}}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/contacts/{{contact.pk}}/profile/edit/" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="modal-body">
+                    <div class="container">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control m-1" name="name" value="{{contact.name}}">
+                    </div>
+                    <div class="container" id="extendableEmail">
+                        <div class="d-flex justify-content-between">
+                            <label for="">Email</label>
+                            <button type="button" class="btn btn-primary btn-sm end-0" onclick="addEmail()">+</button>
+                        </div>
+                        <input type="email" class="form-control m-1" placeholder="Enter Email" name="email" value="{{contact.email}}">
+                    </div>
+                    <div class="container" id="extendablePhone">
+                        <div class="d-flex justify-content-between">
+                            <label for="">Phone Number</label>
+                            <button type="button" class="btn btn-primary btn-sm end-0" onclick="addPhone()">+</button>
+                        </div>
+                        <input type="text" class="form-control m-1" placeholder="Enter Phone No" name="phone" value="{{contact.phone_no}}">
+                    </div>
+                    <div class="container" id="extendableAddress">
+                        <div class="d-flex justify-content-between">
+                            <label for="">Address</label>
+                            <button type="button" class="btn btn-primary btn-sm end-0" onclick="addAddress()">+</button>
+                        </div>
+                        <input type="text" class="form-control m-1" placeholder="Enter Address" name="address" value="{{contact.address}}">
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success">Save Changes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

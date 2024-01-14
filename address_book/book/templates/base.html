@@ -1,0 +1,31 @@
+{% extends 'core.html' %}
+
+{% block content %}
+
+<section class="container-fluid d-flex bg-light justify-content-between p-2">
+    <img src="/static/images/logo.jpg" alt="" id="logo-img">
+    <div class="d-inline-flex align-items-center">
+        <i class="fa fa-user m-1 font-25" aria-hidden="true"></i>
+        {% if request.user.is_authenticated %}
+            <h6 class="m-0">{{request.user.get_full_name}}</h6>
+            <a href="{% url 'logout' %}" class="m-1">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="m-1">Login</a>
+            <a href="{% url 'signup' %}" class="m-1">Sign Up</a>
+        {% endif %}
+        <i class="fa fa-bars m-1 font-25 d-none" aria-hidden="true"></i>
+    </div>
+</section>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+{% endif %}
+
+{% block content2 %}{% endblock %}
+
+{% endblock %}

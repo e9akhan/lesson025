@@ -1,0 +1,16 @@
+{% extends 'core.html' %}
+
+{% block content %}
+<div class="d-flex align-items-center h-100 m-0">
+    <div class="container w-50 h-100 m-0" id="homepage-img">
+        <!-- <img src="/static/images/address-book-wallpaper.jpg" alt="" class="img-fluid" id="homepage-img"> -->
+    </div>
+    <div class="container w-50">
+        <div class="container align-middle text-center">
+            <h3 id="welcome">Welcome to <span>Address Book</span></h3>
+            <a href="{% url 'signup' %}" class="btn btn-danger bg-gradient">Sign In</a>
+            <a href="{% url 'login' %}" class="btn btn-danger bg-gradient">Log In</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

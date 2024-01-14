@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content2 %}
+
+<div class="w-100 d-none">
+    <div class="container-fluid bg-info m-0 p-1">
+        <div class="container">
+            <h4>{{request.user.get_full_name}}</h4>
+        </div>
+        <hr>
+        <div class="container p-1">
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+        <div class="container p-1">
+            <a href="{% url 'all-contacts' %}">All Contacts</a>
+        </div>
+        <div class="container p-1">
+            <a href="{% url 'starred' %}">Starred</a>
+        </div>
+    </div>
+</div>
+
+<section id="mainbody">
+    <h2>Address Book</h2>
+    <div class="container-fluid d-flex justify-content-between" style="height: 90%;">
+        <div id="menucard" class="menucard">
+            <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <i class="fa fa-plus" aria-hidden="true"></i>Add Contact
+            </button>
+
+            <hr class="m-0 p-0">
+
+            <a href="{% url 'all-contacts' %}">
+                <div class="d-flex justify-content-between align-items-center category">
+                    <div class="d-flex align-items-center">
+                        <button class="circle m-1">99</button>
+                        <p class="m-0">All Contacts</p>
+                    </div>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+            </a>
+
+            <hr class="m-0 p-0">
+
+            <a href="{% url 'starred' %}">
+                <div class="d-flex justify-content-between align-items-center category" href="{% url 'starred' %}">
+                    <div class="d-flex align-items-center">
+                        <button class="circle m-1">8</button>
+                        <p class="m-0">Starred</p>
+                    </div>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </div>
+            </a>
+            <hr class="m-0 p-0">
+        </div>
+
+        {% block app_content %}{% endblock %}
+    </div>
+</section>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form action="/contacts/add/" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+        <div class="modal-body">
+                <div class="container">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control m-1" name="name">
+                </div>
+                <div class="container" id="extendableEmail">
+                    <div class="d-flex justify-content-between">
+                        <label for="">Email</label>
+                        <button type="button" class="btn btn-primary btn-sm end-0" onclick="addEmail()">+</button>
+                    </div>
+                    <input type="email" class="form-control m-1" placeholder="Enter Email" name="email">
+                </div>
+                <div class="container" id="extendablePhone">
+                    <div class="d-flex justify-content-between">
+                        <label for="">Phone Number</label>
+                        <button type="button" class="btn btn-primary btn-sm end-0" onclick="addPhone()">+</button>
+                    </div>
+                    <input type="text" class="form-control m-1" placeholder="Enter Phone No" name="phone">
+                </div>
+                <div class="container" id="extendableAddress">
+                    <div class="d-flex justify-content-between">
+                        <label for="">Address</label>
+                        <button type="button" class="btn btn-primary btn-sm end-0" onclick="addAddress()">+</button>
+                    </div>
+                    <input type="text" class="form-control m-1" placeholder="Enter Address" name="address">
+                </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success">Save Changes</button>
+        </div>
+    </form>
+      </div>
+    </div>
+</div>
+
+<script src="/static/js/script.js"></script>
+{% endblock %}

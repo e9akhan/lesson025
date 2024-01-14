@@ -1,0 +1,33 @@
+{% extends 'base2.html' %}
+
+{% block app_content %}
+
+<div id="contactcard">
+    <h4>{% block header %}Contacts{% endblock %}</h4>
+
+    <form action="/contacts/search/">
+        <div class="container d-flex">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </form>
+
+    {% for contact in contacts %}
+        <a href="{% url 'contact-information' contact.pk %}">
+            <div class="d-flex justify-content-between align-items-center category" id="category">
+                <div class="d-flex align-items-center">
+                    {% if contact.image %}
+                        <img src="{{contact.image.url}}" alt="">
+                    {% else %}
+                        <img src="/static/images/contact.jpeg" alt="">
+                    {% endif %}
+                    <p class="m-0">{{contact.name}}</p>
+                </div>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </div>
+        </a>
+
+        <hr class="m-0 p-0">
+    {% endfor %}
+
+{% endblock %}

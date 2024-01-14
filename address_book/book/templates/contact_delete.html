@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content2 %}
+<div class="container h-100">
+    <div class="container align-middle text-center">
+        <form action="" method="post">
+            {% csrf_token %}
+            Are you sure yo want to delete this contact?<br>
+            <button type="submit" class="btn btn-outline-danger">Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

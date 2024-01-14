@@ -1,0 +1,171 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+:root{
+    --bg-color: rgb(187, 222, 239);
+    --color: rgb(12, 147, 215);
+}
+
+body{
+    background-color: #e5e5e5;
+}
+
+#homepage-img{
+    background-image: url(/static/images/address-book-wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+}
+
+#welcome{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#welcome span{
+    color: var(--color);
+    position: relative;
+}
+
+#welcome span::after{
+    content: '';
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-left: 1px solid var(--color);
+    background-color: #e5e5e5;
+    animation: animate 1.5s infinite;
+}
+
+@keyframes animate {
+    100%{
+        left: 100%;
+        width: 0%;
+    }
+}
+
+.font-25{
+    font-size: 25px;
+}
+
+#logo-img{
+    height: 40px;
+    width: 70px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.d-none{
+    display: none;
+}
+
+#mainbody{
+    padding: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 90%;
+}
+
+#mainbody h2{
+    color: rgb(95, 184, 228);
+}
+
+.h-90{
+    height: 90%;
+}
+
+#menucard{
+    width: 30%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    font-size: 10px;
+    background-color: var(--bg-color);
+    color: var(--color);
+    border: none;
+}
+
+.category{
+    padding: 10px;
+}
+
+.category:hover{
+    background-color: var(--bg-color);
+}
+
+.category div p{
+    color: var(--color);
+}
+
+.category i{
+    color: var(--color);
+}
+
+#contactcard{
+    width: 68%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+#contactcard h4{
+    margin: 10px;
+}
+
+.category{
+    padding: 10px;
+}
+
+.category div p:hover{
+    text-decoration: underline;
+}
+
+.category div p{
+    color: var(--color);
+}
+
+.category i{
+    color: var(--color);
+}
+
+.category div img{
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    margin: 5px;
+}
+
+#profile-img{
+    display: block;
+    height: 80px;
+    width: 80px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.custom-card{
+    width: 40%;
+    background-color: #f0f4f9;
+    border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+    .d-none{
+        display: block;
+    }
+
+    #menucard{
+        display: none;
+    }
+
+    #contactcard{
+        width: 100%;
+    }
+}
