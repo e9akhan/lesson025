@@ -32,9 +32,9 @@ def create_contact(request):
         contact = Contact.objects.create(
             user=request.user,
             name=name,
-            email=request.POST.getlist("email", []),
-            phone_no=request.POST.getlist("phone"),
-            address=request.POST.getlist("address", []),
+            email=",".join(request.POST.getlist("email", [])),
+            phone_no=",".join(request.POST.getlist("phone")),
+            address=",".join(request.POST.getlist("address", [])),
         )
 
         contact.save()
@@ -92,7 +92,6 @@ def login_user(request):
         if form.is_valid():
             username = form.cleaned_data["username"].lower()
             password = form.cleaned_data["password"]
-            print(username, password)
 
             if not User.objects.filter(username=username).exists():
                 messages.info(request, "Incorrect Username")

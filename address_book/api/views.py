@@ -33,7 +33,7 @@ def contact(request):
         user_contact.save()
         return JsonResponse({"message": "Created"}, safe=False)
 
-    json_data = serializers.serialize("json", Contact.objects.all())
+    json_data = json.loads(serializers.serialize("json", Contact.objects.all()))
     return JsonResponse({"items": json_data}, safe=False)
 
 
@@ -89,6 +89,6 @@ def contact_with_pk(request, pk):
 
         return JsonResponse({"message": "Deleted"}, safe=False)
 
-    user_contact = Contact.objects.get(pk=pk)
-    json_data = json.dumps(user_contact)
+    user_contact = Contact.objects.filter(pk=pk)
+    json_data = json.loads(serializers.serialize('json', user_contact))
     return JsonResponse({"item": json_data}, safe=False)
