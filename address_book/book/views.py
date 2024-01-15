@@ -92,7 +92,6 @@ def login_user(request):
         if form.is_valid():
             username = form.cleaned_data["username"].lower()
             password = form.cleaned_data["password"]
-            print(username, password)
 
             if not User.objects.filter(username=username).exists():
                 messages.info(request, "Incorrect Username")
