@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'book.apps.BookConfig',
-    'api.apps.ApiConfig'
+    "book.apps.BookConfig",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -119,16 +119,14 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = "media/"
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / "media"
 
-LOGIN_REDIRECT_URL = 'all-contacts'
-LOGOUT_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = "all-contacts"
+LOGOUT_REDIRECT_URL = "homepage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

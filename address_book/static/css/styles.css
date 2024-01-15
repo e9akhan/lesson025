@@ -57,7 +57,11 @@ body{
     background-color: transparent;
 }
 
-.d-none{
+.display-none{
+    display: none;
+}
+
+#menutab{
     display: none;
 }
 
@@ -151,14 +155,17 @@ body{
 }
 
 .custom-card{
-    width: 40%;
     background-color: #f0f4f9;
     border-radius: 10px;
 }
 
 @media (max-width: 700px) {
-    .d-none{
+    .display-none{
         display: block;
+    }
+
+    #navtab{
+        display: none;
     }
 
     #menucard{
@@ -166,6 +173,23 @@ body{
     }
 
     #contactcard{
+        width: 100%;
+    }
+
+    #homepage-img{
+        display: none;
+    }
+
+    #welcome span::after{
+        display: none;
+    }
+
+    #homepage-body{
+        background-color: grey;
+        color: white;
+    }
+
+    .custom-card{
         width: 100%;
     }
 }
