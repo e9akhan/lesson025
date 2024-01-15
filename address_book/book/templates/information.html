@@ -32,39 +32,28 @@
     <div class="d-flex justify-content-center mt-4">
         <div class="custom-card m-2 p-2">
             <h5>Contact Details</h5>
-            <div class="d-flex">
-                <i class="fa fa-envelope-o m-1" aria-hidden="true"></i>
-                {% if email_list %}
-                    {% for email in contact.email %}
-                        <p class="container-fluid m-0">{{email}}</p>
-                    {% endfor %}
-                {% else %}
-                    <p class="container-fluid m-0">{{contact.email}}</p>
-                {% endif %}
-            </div>
-            <div class="d-flex">
-                <i class="fa fa-phone m-1" aria-hidden="true"></i>
-                {% if phone_list %}
-                    {% for phone in contact.phone_no %}
-                        <p class="container-fluid m-0">{{phone}}</p>
-                    {% endfor %}
-                {% else %}
-                    <p class="container-fluid m-0">{{contact.phone_no}}</p>
-                {% endif %}
-            </div>
+            {% for email in contact.email_list %}
+                <div class="d-flex">
+                    <i class="fa fa-envelope-o m-1" aria-hidden="true"></i>
+                    <p class="container-fluid m-0">{{email}}</p>
+                </div>
+            {% endfor %}
+
+            {% for phone in contact.phone_no_list %}
+                <div class="d-flex">
+                    <i class="fa fa-phone m-1" aria-hidden="true"></i>    
+                    <p class="container-fluid m-0">{{phone}}</p>    
+                </div>
+            {% endfor %}
         </div>
         <div class="custom-card m-2 p-2">
             <h5>Work Place</h5>
-            <div class="d-flex">
-                <i class="fa fa-briefcase m-1" aria-hidden="true"></i>
-                {% if phone_list %}
-                    {% for address in contact.address %}
-                        <p class="container-fluid m-0">{{address}}</p>
-                    {% endfor %}
-                {% else %}
-                    <p class="container-fluid m-0">{{contact.address}}</p>
-                {% endif %}
-            </div>
+            {% for address in contact.address_list %}
+                <div class="d-flex">
+                    <i class="fa fa-briefcase m-1" aria-hidden="true"></i>
+                    <p class="container-fluid m-0">{{address}}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -88,21 +77,27 @@
                             <label for="">Email</label>
                             <button type="button" class="btn btn-primary btn-sm end-0" onclick="addEmail()">+</button>
                         </div>
-                        <input type="email" class="form-control m-1" placeholder="Enter Email" name="email" value="{{contact.email}}">
+                        {% for email in contact.email_list %}
+                            <input type="email" class="form-control m-1" placeholder="Enter Email" name="email" value="{{email}}">
+                        {% endfor %}
                     </div>
                     <div class="container" id="extendablePhone">
                         <div class="d-flex justify-content-between">
                             <label for="">Phone Number</label>
                             <button type="button" class="btn btn-primary btn-sm end-0" onclick="addPhone()">+</button>
                         </div>
-                        <input type="text" class="form-control m-1" placeholder="Enter Phone No" name="phone" value="{{contact.phone_no}}">
+                        {% for phone in contact.phone_no_list %}
+                            <input type="text" class="form-control m-1" placeholder="Enter Phone No" name="phone" value="{{phone}}">
+                        {% endfor %}
                     </div>
                     <div class="container" id="extendableAddress">
                         <div class="d-flex justify-content-between">
                             <label for="">Address</label>
                             <button type="button" class="btn btn-primary btn-sm end-0" onclick="addAddress()">+</button>
                         </div>
-                        <input type="text" class="form-control m-1" placeholder="Enter Address" name="address" value="{{contact.address}}">
+                        {% for address in contact.address_list %}
+                            <input type="text" class="form-control m-1" placeholder="Enter Address" name="address" value="{{address}}">
+                        {% endfor %}
                     </div>
             </div>
 

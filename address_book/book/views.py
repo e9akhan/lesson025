@@ -32,9 +32,9 @@ def create_contact(request):
         contact = Contact.objects.create(
             user=request.user,
             name=name,
-            email=request.POST.getlist("email", []),
-            phone_no=request.POST.getlist("phone"),
-            address=request.POST.getlist("address", []),
+            email=",".join(request.POST.getlist("email", [])),
+            phone_no=",".join(request.POST.getlist("phone")),
+            address=",".join(request.POST.getlist("address", [])),
         )
 
         contact.save()
