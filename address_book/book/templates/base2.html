@@ -2,24 +2,6 @@
 
 {% block content2 %}
 
-<div class="w-100 d-none">
-    <div class="container-fluid bg-info m-0 p-1">
-        <div class="container">
-            <h4>{{request.user.get_full_name}}</h4>
-        </div>
-        <hr>
-        <div class="container p-1">
-            <a href="{% url 'logout' %}">Logout</a>
-        </div>
-        <div class="container p-1">
-            <a href="{% url 'all-contacts' %}">All Contacts</a>
-        </div>
-        <div class="container p-1">
-            <a href="{% url 'starred' %}">Starred</a>
-        </div>
-    </div>
-</div>
-
 <section id="mainbody">
     <h2>Address Book</h2>
     <div class="container-fluid d-flex justify-content-between" style="height: 90%;">

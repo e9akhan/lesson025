@@ -4,18 +4,47 @@
 
 <section class="container-fluid d-flex bg-light justify-content-between p-2">
     <img src="/static/images/logo.jpg" alt="" id="logo-img">
-    <div class="d-inline-flex align-items-center">
-        <i class="fa fa-user m-1 font-25" aria-hidden="true"></i>
-        {% if request.user.is_authenticated %}
-            <h6 class="m-0">{{request.user.get_full_name}}</h6>
-            <a href="{% url 'logout' %}" class="m-1">Logout</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="m-1">Login</a>
-            <a href="{% url 'signup' %}" class="m-1">Sign Up</a>
-        {% endif %}
-        <i class="fa fa-bars m-1 font-25 d-none" aria-hidden="true"></i>
+    <div id="navtab">
+        <div class="d-inline-flex align-items-center">
+            <i class="fa fa-user m-1 font-25" aria-hidden="true"></i>
+            {% if request.user.is_authenticated %}
+                <h6 class="m-0">{{request.user.get_full_name}}</h6>
+                <a href="{% url 'logout' %}" class="m-1">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="m-1">Login</a>
+                <a href="{% url 'signup' %}" class="m-1">Sign Up</a>
+            {% endif %}
+        </div>
     </div>
+    <i class="fa fa-bars m-1 font-25 display-none" aria-hidden="true" onclick="displaymenu()"></i>
 </section>
+
+<div class="w-100" id="menutab">
+    <div class="container-fluid bg-info m-0 p-1">
+        {% if request.user.is_authenticated %}
+            <div class="container">
+                <h4>{{request.user.get_full_name}}</h4>
+            </div>
+            <hr>
+            <div class="container p-1">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+            <div class="container p-1">
+                <a href="{% url 'all-contacts' %}">All Contacts</a>
+            </div>
+            <div class="container p-1">
+                <a href="{% url 'starred' %}">Starred</a>
+            </div>
+        {% else %}
+        <div class="container">
+            <a href="{% url 'login' %}">Logout</a>
+        </div>
+        <div class="container">
+            <a href="{% url 'signup' %}">Logout</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
 
 {% if messages %}
     {% for message in messages %}

@@ -33,3 +33,18 @@ function addAddress(){
 
     divaddressblock.appendChild(newElement)
 }
+
+var menubar = document.getElementById('menubar')
+var menutab = document.getElementById('menutab')
+var active = 0
+
+function displaymenu(){
+    if (active == 0){
+        menutab.style = 'display: block;'
+        active = 1
+    }
+    else{
+        menutab.style = 'display: none;'
+        active = 0
+    }
+}

@@ -2,7 +2,7 @@
 
 {% block app_content %}
 
-<div id="contactcard">
+<div id="contactcard" class="position-relative">
     <h4>{% block header %}Contacts{% endblock %}</h4>
 
     <form action="/contacts/search/">
@@ -29,5 +29,24 @@
 
         <hr class="m-0 p-0">
     {% endfor %}
+
+   <div class="position-absolute bottom-0 start-50">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
 
 {% endblock %}
