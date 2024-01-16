@@ -12,12 +12,15 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import DeleteView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from book.models import Contact
 from book.forms import UserForm, LoginForm
 
 
 # Create your views here.
+@login_required(login_url="login")
 def create_contact(request):
     """
     Function to create a contact.
@@ -42,6 +45,7 @@ def create_contact(request):
     return render(request, "contacts.html")
 
 
+@login_required(login_url= "login")
 def update_contact(request, pk):
     """
     Funcation to update a contact.
@@ -114,6 +118,7 @@ def login_user(request):
     return render(request, "login.html", {"form": form})
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class ContactList(ListView):
     """
     Class for contact list.
@@ -127,6 +132,7 @@ class ContactList(ListView):
         return Contact.objects.filter(user=self.request.user)
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class StarredList(ListView):
     """
     Class for starred contact list.
@@ -141,6 +147,7 @@ class StarredList(ListView):
         return contacts
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class ContactDetail(DetailView):
     """
     Class to provide details of a contact.
@@ -150,26 +157,8 @@ class ContactDetail(DetailView):
     context_object_name = "contact"
     template_name = "information.html"
 
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
 
-        contact = Contact.objects.get(pk=self.kwargs["pk"])
-
-        email_list = False
-        phone_list = False
-
-        if isinstance(contact.email, list):
-            email_list = True
-
-        if isinstance(contact.phone_no, list):
-            phone_list = True
-
-        context["email_list"] = email_list
-        context["phone_list"] = phone_list
-
-        return context
-
-
+@method_decorator(login_required(login_url="login"), name="dispatch")
 def mark_star(request, pk):
     """
     Function to mark a contact starred or unstarred.
@@ -186,6 +175,7 @@ def mark_star(request, pk):
     return redirect(f"/contacts/{pk}/profile/")
 
 
+@method_decorator(login_required(login_url="login"), name="dispatch")
 class ContactDelete(DeleteView):
     """
     Class to delete a contact.
@@ -196,6 +186,7 @@ class ContactDelete(DeleteView):
     success_url = "/contacts/all-contacts/"
 
 
+@login_required(login_url="login")
 def search_query(request):
     """
     Function to make search.
