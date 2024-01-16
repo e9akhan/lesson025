@@ -90,5 +90,5 @@ def contact_with_pk(request, pk):
         return JsonResponse({"message": "Deleted"}, safe=False)
 
     user_contact = Contact.objects.filter(pk=pk)
-    json_data = json.loads(serializers.serialize('json', user_contact))
+    json_data = json.loads(serializers.serialize("json", user_contact))
     return JsonResponse({"item": json_data}, safe=False)

@@ -23,15 +23,15 @@ class Contact(models.Model):
 
     @property
     def email_list(self):
-        return self.email.split(',')
+        return self.email.split(",")
 
     @property
     def phone_no_list(self):
-        return self.phone_no.split(',')
+        return self.phone_no.split(",")
 
     @property
     def address_list(self):
-        return self.address.split(',')
+        return self.address.split(",")
 
     def __str__(self):
         return f"{self.name}"

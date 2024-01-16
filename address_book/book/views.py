@@ -45,7 +45,7 @@ def create_contact(request):
     return render(request, "contacts.html")
 
 
-@login_required(login_url= "login")
+@login_required(login_url="login")
 def update_contact(request, pk):
     """
     Funcation to update a contact.
