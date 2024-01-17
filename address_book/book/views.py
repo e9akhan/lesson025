@@ -48,15 +48,15 @@ def create_contact(request):
 @login_required(login_url="login")
 def update_contact(request, pk):
     """
-    Funcation to update a contact.
+    Function to update a contact.
     """
     if request.method == "POST":
         contact = Contact.objects.get(pk=pk)
 
         contact.name = request.POST["name"]
-        contact.email = request.POST.getlist("email", [])
-        contact.phone_no = request.POST.getlist("phone", [])
-        contact.address = request.POST.getlist("address", [])
+        contact.email = ",".join(request.POST.getlist("email", []))
+        contact.phone_no = ",".join(request.POST.getlist("phone"))
+        contact.address = ",".join(request.POST.getlist("address", []))
 
         contact.save()
         return redirect(f"/contacts/{pk}/profile/")
@@ -131,6 +131,16 @@ class ContactList(ListView):
     def get_queryset(self):
         return Contact.objects.filter(user=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_contacts"] = len(
+            list(Contact.objects.filter(user=self.request.user))
+        )
+        context["total_starred"] = len(
+            list(Contact.objects.filter(user=self.request.user, starred=True))
+        )
+        return context
+
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
 class StarredList(ListView):
@@ -143,8 +153,17 @@ class StarredList(ListView):
     context_object_name = "contacts"
 
     def get_queryset(self):
-        contacts = Contact.objects.filter(user=self.request.user, starred=True)
-        return contacts
+        return Contact.objects.filter(user=self.request.user, starred=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_contacts"] = len(
+            list(Contact.objects.filter(user=self.request.user))
+        )
+        context["total_starred"] = len(
+            list(Contact.objects.filter(user=self.request.user, starred=True))
+        )
+        return context
 
 
 @method_decorator(login_required(login_url="login"), name="dispatch")
@@ -157,8 +176,18 @@ class ContactDetail(DetailView):
     context_object_name = "contact"
     template_name = "information.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_contacts"] = len(
+            list(Contact.objects.filter(user=self.request.user))
+        )
+        context["total_starred"] = len(
+            list(Contact.objects.filter(user=self.request.user, starred=True))
+        )
+        return context
 
-@method_decorator(login_required(login_url="login"), name="dispatch")
+
+@login_required(login_url="login")
 def mark_star(request, pk):
     """
     Function to mark a contact starred or unstarred.

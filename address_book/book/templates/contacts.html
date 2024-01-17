@@ -12,23 +12,27 @@
         </div>
     </form>
 
-    {% for contact in contacts %}
-        <a href="{% url 'contact-information' contact.pk %}">
-            <div class="d-flex justify-content-between align-items-center category" id="category">
-                <div class="d-flex align-items-center">
-                    {% if contact.image %}
-                        <img src="{{contact.image.url}}" alt="">
-                    {% else %}
-                        <img src="/static/images/contact.jpeg" alt="">
-                    {% endif %}
-                    <p class="m-0">{{contact.name}}</p>
+    {% if contacts %}
+        {% for contact in contacts %}
+            <a href="{% url 'contact-information' contact.pk %}">
+                <div class="d-flex justify-content-between align-items-center category" id="category">
+                    <div class="d-flex align-items-center">
+                        {% if contact.image %}
+                            <img src="{{contact.image.url}}" alt="">
+                        {% else %}
+                            <img src="/static/images/contact.jpeg" alt="">
+                        {% endif %}
+                        <p class="m-0">{{contact.name}}</p>
+                    </div>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </div>
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </div>
-        </a>
+            </a>
 
-        <hr class="m-0 p-0">
-    {% endfor %}
+            <hr class="m-0 p-0">
+        {% endfor %}
+    {% else %}
+        <h4>No Results Found.</h4>
+    {% endif %}
 
    <div class="position-absolute bottom-0 start-50">
         <span class="step-links">

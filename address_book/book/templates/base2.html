@@ -15,7 +15,7 @@
             <a href="{% url 'all-contacts' %}">
                 <div class="d-flex justify-content-between align-items-center category">
                     <div class="d-flex align-items-center">
-                        <button class="circle m-1">99</button>
+                        <button class="circle m-1">{{total_contacts}}</button>
                         <p class="m-0">All Contacts</p>
                     </div>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -27,7 +27,7 @@
             <a href="{% url 'starred' %}">
                 <div class="d-flex justify-content-between align-items-center category" href="{% url 'starred' %}">
                     <div class="d-flex align-items-center">
-                        <button class="circle m-1">8</button>
+                        <button class="circle m-1">{{total_starred}}</button>
                         <p class="m-0">Starred</p>
                     </div>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
